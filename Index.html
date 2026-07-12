@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>Notice Board</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        .notice-container { width: 100%; background: #333; color: white; padding: 15px; overflow: hidden; white-space: nowrap; }
+        .scrolling-text { display: inline-block; animation: scroll-left 15s linear infinite; }
+        @keyframes scroll-left { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
+    </style>
+</head>
+<body>
+
+    <div class="notice-container">
+        <div id="notice-board" class="scrolling-text">নোটিশ লোড হচ্ছে...</div>
+    </div>
+
+    <h3>পুরানো নোটিশসমূহ:</h3>
+    <ul id="notice-list"></ul>
+
+    <script>
+        // আপনার গুগল শিটের আইডি (লিংক থেকে নেওয়া)
+        const sheetId = '1p-KiS_DT9vKU5yaGBMKlBdzXPN7P9Dwg62I9WFwU9ZE';
+        
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(init);
+
+        function init() {
+            var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?gid=0');
+            query.send(handleQueryResponse);
+        }
+
+        function handleQueryResponse(response) {
+            var data = response.getDataTable();
+            var noticeBoard = document.getElementById('notice-board');
+            var listContainer = document.getElementById('notice-list');
+            
+            let notices = [];
+            for (var i = 0; i < data.getNumberOfRows(); i++) {
+                notices.push(data.getValue(i, 0));
+            }
+
+            if (notices.length > 0) {
+                // সর্বশেষ নোটিশ
+                noticeBoard.innerText = notices[notices.length - 1];
+                
+                // সব নোটিশের তালিকা
+                listContainer.innerHTML = '';
+                notices.reverse().forEach(text => {
+                    let li = document.createElement('li');
+                    li.innerText = text;
+                    listContainer.appendChild(li);
+                });
+            } else {
+                noticeBoard.innerText = "কোনো নোটিশ নেই।";
+            }
+        }
+    </script>
+</body>
+</html>
+     listContainer.innerHTML = ''; 
+                    
+                    dataRows.forEach((row) => {
+                        const li = document.createElement('li');
+                        li.innerText = row.replace(/"/g, '');
+                        listContainer.appendChild(li);
+                    });
+                } else {
+                    document.getElementById('notice-board').innerText = "কোনো নোটিশ পাওয়া যায়নি।";
+                }
+            })
+            .catch(error => {
+                document.getElementById('notice-board').innerText = "লোড করতে সমস্যা হচ্ছে।";
+                console.error('Error:', error);
+            });
+    </script>
+
+</body>
+</html>
