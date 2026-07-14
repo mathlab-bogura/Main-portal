@@ -145,7 +145,7 @@
             <p>আইডি: <span id="rId"></span></p>
            <p>মোট নম্বর: <span id="rTotal Marks"></span></p
            <p>প্রাপ্ত নম্বর: <span id="rObtain Marks"></span></p>
-           <p>পাস/ফেল: <span id="rpass/Fail" style="font-size:1.2rem; color:#10b981; font-weight:bold;"></span></p>
+           <p>পাস/ফেল: <span id="rPass/Fail" style="font-size:1.2rem; color:#10b981; font-weight:bold;"></span></p>
         </div>
     </div>
 </div>
@@ -301,7 +301,9 @@
                     document.getElementById('rName').innerText = cols[0];
                     document.getElementById('rClass').innerText = cols[1];
                     document.getElementById('rId').innerText = cols[2];
-                    document.getElementById('rMarks').innerText = cols[3];
+                    document.getElementById('rTotal Marks').innerText = cols[3];
+                    document.getElementById('rObtain Marks').innerText = cols[4];
+                    document.getElementById('rPass/Fail').innerText = cols[5];
                     res.style.display = "block"; msg.innerText = ""; found = true; break;
                 }
             }
