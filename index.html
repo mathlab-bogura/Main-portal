@@ -145,9 +145,8 @@
             <p>আইডি: <span id="rId"></span></p>
            <p>মোট নম্বর: <span id="rTotal Marks"></span></p
            <p>প্রাপ্ত নম্বর: <span id="rObtain Marks"></span></p>
-           <p>পাস/ফেল: <span id="rPass/Fail" style="font-size:1.2rem; color:#10b981; font-weight:bold;"></span></p>
-        </div>
-    </div>
+         <p>পাস/ফেল: <span id="rPass/Fail" style="font-size:1.2rem; font-weight:bold;"></span></p>
+          </div>
 </div>
 
 <div id="blood-tab" class="tab-content">
@@ -291,7 +290,7 @@
         if(!input) { msg.innerText = "আইডি লিখুন!"; return; }
         msg.innerText = "খোঁজা হচ্ছে..."; res.style.display = "none";
         try {
-            const response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSc_jaVWGWPZONTpaNIylCnWht99iAL0_Tupv_ZByldDwbq2i_JWhWypWdpZGA50cwQMHHl66ekD8we/pub?gid=0&single=true&output=csv&t=" + new Date().getTime());
+            const response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vT-87hRgCOO6OBIb23mVyKt4sP53br-YOq8oCLLABFT-QVYoHrswQkGnZqprxVqvNhDSR-v7_4kZYRo/pub?gid=0&single=true&output=csv&t=" + new Date().getTime());
             const data = await response.text();
             const rows = data.split('\n');
             let found = false;
@@ -303,8 +302,18 @@
                     document.getElementById('rId').innerText = cols[2];
                     document.getElementById('rTotal Marks').innerText = cols[3];
                     document.getElementById('rObtain Marks').innerText = cols[4];
-                    document.getElementById('rPass/Fail').innerText = cols[5];
-                    res.style.display = "block"; msg.innerText = ""; found = true; break;
+                    const rSpan = document.getElementById('rPass/Fail');
+const resVal = cols[5] ? cols[5].trim().toUpperCase() : "";
+rSpan.innerText = resVal;
+
+if (resVal === 'PASS') {
+    rSpan.style.color = '#27ae60'; // পাস হলে সবুজ রঙ
+} else if (resVal === 'FAIL') {
+    rSpan.style.color = '#e74c3c'; // ফেল হলে লাল রঙ
+} else {
+    rSpan.style.color = ''; // অন্য কোনো লেখা থাকলে সাধারণ রঙ
+}
+ res.style.display = "block"; msg.innerText = ""; found = true; break;
                 }
             }
             if(!found) msg.innerText = "রেজাল্ট পাওয়া যায়নি!";
