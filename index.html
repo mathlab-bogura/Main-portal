@@ -143,10 +143,13 @@
             <p>নাম: <span id="rName" style="font-weight:bold; color:#fbbf24;"></span></p>
             <p>শ্রেণি: <span id="rClass"></span></p>
             <p>আইডি: <span id="rId"></span></p>
-           <p>মোট নম্বর: <span id="rTotal Marks"></span></p
-           <p>প্রাপ্ত নম্বর: <span id="rObtain Marks"></span></p>
-         <p>পাস/ফেল: <span id="rPass/Fail" style="font-size:1.2rem; font-weight:bold;"></span></p>
-          </div>
+            <p>মোট নম্বর: <span id="rTotalMarks"></span></p>
+            <p>প্রাপ্ত নম্বর: <span id="rObtainMarks"></span></p>
+            <p>পাস/ফেল: <span id="rPassFail" style="font-size:1.2rem; font-weight:bold;"></span></p>
+        </div>
+    </div> <!-- .box এর ক্লোজিং -->
+</div> <!-- #result-tab এর ক্লোজিং -->
+    
 </div>
 
 <div id="blood-tab" class="tab-content">
@@ -300,11 +303,11 @@
                     document.getElementById('rName').innerText = cols[0];
                     document.getElementById('rClass').innerText = cols[1];
                     document.getElementById('rId').innerText = cols[2];
-                    document.getElementById('rTotal Marks').innerText = cols[3];
-                    document.getElementById('rObtain Marks').innerText = cols[4];
-                    const rSpan = document.getElementById('rPass/Fail');
-const resVal = cols[5] ? cols[5].trim().toUpperCase() : "";
-rSpan.innerText = resVal;
+                    document.getElementById('rTotalMarks').innerText = cols[3];
+                   document.getElementById('rObtainMarks').innerText = cols[4];
+                    const rSpan = document.getElementById('rPassFail');
+             const resVal = cols[5] ? cols[5].trim().toUpperCase() : "";
+   rSpan.innerText = resVal;
 
 if (resVal === 'PASS') {
     rSpan.style.color = '#27ae60'; // পাস হলে সবুজ রঙ
